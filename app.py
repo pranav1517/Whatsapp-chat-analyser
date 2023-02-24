@@ -9,7 +9,7 @@ if uploaded_file is not None:
     data = bytes_data.decode("utf-8")
     df = preprocessor.preprocess(data)
 
-    st.dataframe(df)
+    # st.dataframe(df)
 
     #fetch unique users
     user_list = df['user'].unique().tolist()
@@ -22,9 +22,8 @@ if uploaded_file is not None:
     if st.sidebar.button("Show Analysis"):
 
         num_messages, words, num_media_messages, num_links= helper.fetch_stats(selected_user,df)
-
+        st.title("Top Statistics")
         col1, col2, col3, col4 = st.columns(4)
-
         with col1:
             st.header("Total Message")
             st.title(num_messages)
@@ -37,6 +36,23 @@ if uploaded_file is not None:
         with col4:
             st.header("Links Shared")
             st.title(num_links)
+
+        # monthly timeline
+        st.title("Monthly Timeline")
+        timeline = helper.monthly_timeline(selected_user,df)
+        fig,ax = plt.subplots()
+        ax.plot(timeline['time'], timeline['message'],color = 'green')
+        plt.xticks(rotation='vertical')
+        st.pyplot(fig)
+
+        #daily timeline
+        st.title("Daily Timeline")
+        daily_timeline = helper.daily_timeline(selected_user, df)
+        fig, ax = plt.subplots()
+        ax.plot(daily_timeline['only_date'], daily_timeline['message'], color='black')
+        plt.xticks(rotation='vertical')
+        st.pyplot(fig)
+
         # finding the busiest user in  chat
         if selected_user == 'Overall':
             st.title('Most Busy Users')
