@@ -130,5 +130,7 @@ def links_dataframe(links):
     ldf = HTML(ldf.to_html(render_links=True,escape=False))
 
     return ldf
-def convert_df(df):
+def convert_df(selected_user,df):
+    if selected_user != 'Overall':
+        df = df[df['user'] == selected_user]
     return df.to_csv().encode('utf-8')
