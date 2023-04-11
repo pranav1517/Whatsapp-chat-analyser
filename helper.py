@@ -130,3 +130,5 @@ def links_dataframe(links):
     ldf = HTML(ldf.to_html(render_links=True,escape=False))
 
     return ldf
+def convert_df(df):
+    return df.to_csv().encode('utf-8')
