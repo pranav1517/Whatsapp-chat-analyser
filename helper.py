@@ -124,3 +124,9 @@ def activity_heatmap(selected_user,df):
     user_heatmap = df.pivot_table(index='day_name', columns='period', values='message', aggfunc='count').fillna(0)
 
     return user_heatmap
+def links_dataframe(links):
+
+    ldf = pd.DataFrame(links,columns=['shared_links'])
+    ldf = HTML(ldf.to_html(render_links=True,escape=False))
+
+    return ldf
