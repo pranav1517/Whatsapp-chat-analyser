@@ -124,5 +124,5 @@ if uploaded_file is not None:
 if st.sidebar.button('Show Links Data'):
     links
     
-csv = helper.convert_df(userdf.drop('period',axis=1))
+csv = helper.convert_df(selected_user,df)
 st.sidebar.download_button("Download Raw Data",csv,f"{selected_user}.csv","text/csv")
