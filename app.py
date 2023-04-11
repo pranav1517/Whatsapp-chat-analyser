@@ -22,7 +22,7 @@ if uploaded_file is not None:
     df = getdata(data)
 
     user_list = df['user'].unique().tolist()
-    user_list.remove('group-notification')
+    # user_list.remove('group-notification')
     user_list.sort()
     user_list.insert(0,"Overall")
 
